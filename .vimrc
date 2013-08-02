@@ -25,7 +25,7 @@ Bundle 'L9'
 Bundle 'FuzzyFinder' 
 
 "状态栏
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
 "git 插件
 Bundle 'tpope/vim-fugitive' 
 "高亮选中单词并跳转
@@ -203,6 +203,7 @@ set expandtab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+set softtabstop=4
 
 " Linebreak on 500 characters
 set lbr
@@ -457,12 +458,14 @@ let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 "set tags=/home/chi/work/os/linux-0.11-src/linux/tags
 
 "current folder
-set tags=tags;/
+"set tags=tags;/
+set tags=./tags,tags
 "set tags+=/home/chi/work/open-source-code/linux.kernel.2.6/tags
 set nocsverb
-set autochdir
+" 自动设当前编辑的文件所在目录为当前工作路径
+"set autochdir
 "set showmatch
-autocmd FileType c,h,cpp set tags+=~/.vim/systags|cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out
+autocmd FileType c,h,cpp,S set tags+=~/.vim/systags|cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out
 autocmd FileType python set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
 
 "open/close Tlist
@@ -503,17 +506,18 @@ nmap <M-n> <C-t>
 "nmap <M-m> <C-o>
 nmap <M-/> :ts  <CR>
 
-nmap <C-w> <Esc>:w<CR>
-imap <C-w> <Esc>:w<CR>
-nmap <C-q> <Esc>:q<CR>
-imap <C-q> <Esc>:q<CR>
+nmap <M-w> <Esc>:w<CR>
+imap <M-w> <Esc>:w<CR>
+nmap <M-q> <Esc>:q<CR>
+imap <M-q> <Esc>:q<CR>
 "let g:tagbar_left=1
 "
 set fileencoding=utf-8
 set fileencodings=utf-8,gb18030,utf-16,big5
 
 set ttimeoutlen=1
-for UseAlt in range ( 44 , 47 ) + range ( 109 , 110)
+" 防止terminal截取alt键,导致M-x的快捷键不能用
+for UseAlt in range ( 44 , 47 ) + range ( 97 , 122)
    exe "set <M-" .nr2char(UseAlt).">=\<Esc>" .nr2char (UseAlt)
 endfor
 
@@ -522,3 +526,6 @@ set pastetoggle=<F8>
 :set vb t_vb=
 
 "silent !stty -ixon > /dev/null 2>/dev/null
+
+"试用十进制
+set nrformats=
