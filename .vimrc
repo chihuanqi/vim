@@ -36,11 +36,11 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-rails.git' 
 
 "打开文件
-Bundle 'git://git.wincent.com/command-t.git' 
+Bundle 'https://git.wincent.com/command-t.git' 
 "puppet代码高亮
-Bundle 'git://github.com/rodjek/vim-puppet'
+Bundle 'https://github.com/rodjek/vim-puppet'
 "python 代码完成
-Bundle 'git://github.com/davidhalter/jedi-vim'
+Bundle 'https://github.com/davidhalter/jedi-vim'
 
 filetype plugin indent on     " 必须有
  "
