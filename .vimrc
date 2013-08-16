@@ -465,8 +465,8 @@ set nocsverb
 " 自动设当前编辑的文件所在目录为当前工作路径
 "set autochdir
 "set showmatch
-autocmd FileType c,h,cpp,S set tags+=~/.vim/systags|cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out
-autocmd FileType python set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
+autocmd FileType c,h,cpp,S set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab | set nolist | set tags+=~/.vim/systags|cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out
+autocmd FileType python set list | set listchars=tab:>- | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out 
 
 "open/close Tlist
 "let Tlist_Auto_Open=1
