@@ -22,7 +22,9 @@ Bundle 'c.vim'
 "vim库
 Bundle 'L9' 
 "查找
-Bundle 'FuzzyFinder' 
+Bundle 'FuzzyFinder'
+"buffer管理
+Bundle 'vim-scripts/bufexplorer.zip'
 
 "状态栏
 "Bundle 'Lokaltog/vim-powerline'
@@ -34,6 +36,14 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'} 
 "rails 编辑
 Bundle 'tpope/vim-rails.git' 
+"多重括号颜色区分匹配
+Bundle 'kien/rainbow_parentheses.vim'
+"目录树
+Bundle 'vim-scripts/The-NERD-tree'
+"代码完成
+"Bundle 'Valloric/YouCompleteMe'
+"Vim plugin: Testing framework for Vim script
+Bundle 'kana/vim-vspec'
 
 "打开文件
 Bundle 'https://git.wincent.com/command-t.git' 
@@ -54,6 +64,7 @@ filetype plugin indent on     " 必须有
  " NOTE: comments after Bundle command are not allowed..
 
 " Jedi options
+" Jedi options
 "Jedi is by default automatically initialized. If you don't want that I suggest you disable the auto-initialization in your .vimrc:
 let g:jedi#auto_initialization = 1
 
@@ -61,34 +72,34 @@ let g:jedi#auto_initialization = 1
 let g:jedi#auto_vim_configuration = 0
 
 "The goto is by default on <leader g>. If you want to change that:
-let g:jedi#goto_command = "<leader>g"
+let g:jedi#goto_assignments_command = '<C-g>'
 
 "get_definition is by default on <leader d>. If you want to change that:
-let g:jedi#get_definition_command = "<leader>d"
+let g:jedi#goto_definitions_command = '<C-d>'
 
 "Showing the pydoc is by default on K If you want to change that:
-let g:jedi#pydoc = "K"
+let g:jedi#documentation_command = 'K' 
 
 "If you are a person who likes to use VIM-buffers not tabs, you might want to put that in your .vimrc:
-let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#use_tabs_not_buffers = 0 
 
 "Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
-let g:jedi#popup_on_dot = 0
+let g:jedi#popup_on_dot = 0 
 
 "Jedi selects the first line of the completion menu: for a better typing-flow and usually saves one keypress.
-let g:jedi#popup_select_first = 0
+let g:jedi#popup_select_first = 0 
 
 "There's some support for refactoring:
-let g:jedi#rename_command = "<leader>r"
+let g:jedi#rename_command = '<C-r>'
 
 "And you can list all names that are related (have the same origin):
-let g:jedi#related_names_command = "<leader>n"
+let g:jedi#usages_command = '<C-n>'
 
 "If you want to change the default autocompletion command:
-let g:jedi#autocompletion_command = "<M-/>"
+let g:jedi#completions_command = '<M-/>'
 
 "By default you get a window that displays the function definition you're currently in. If you don't want that:
-let g:jedi#show_function_definition = "0"
+let g:jedi#show_call_signatures = '0'
 
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -195,7 +206,7 @@ set noswapfile
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-set expandtab
+"set expandtab
 
 " Be smart when using tabs ;)
 " set smarttab
@@ -466,7 +477,7 @@ set nocsverb
 "set autochdir
 "set showmatch
 autocmd FileType c,h,cpp,S set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab | set nolist | set tags+=~/.vim/systags|cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out
-autocmd FileType python set list | set listchars=tab:>- | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out 
+autocmd FileType python set expandtab | set list | set listchars=tab:>- | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out 
 
 "open/close Tlist
 "let Tlist_Auto_Open=1
@@ -511,7 +522,9 @@ imap <M-w> <Esc>:w<CR>
 nmap <M-q> <Esc>:q<CR>
 imap <M-q> <Esc>:q<CR>
 "let g:tagbar_left=1
-"
+
+map bf :BufExplorer<CR>
+
 set fileencoding=utf-8
 set fileencodings=utf-8,gb18030,utf-16,big5
 
@@ -529,3 +542,5 @@ set pastetoggle=<F8>
 
 "试用十进制
 set nrformats=
+
+au BufRead *.py map <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
