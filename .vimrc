@@ -537,7 +537,8 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 
 set ttimeoutlen=1
 " 防止terminal截取alt键,导致M-x的快捷键不能用
-for UseAlt in range ( 44 , 47 ) + range ( 97 , 122)
+for UseAlt in range ( 44 , 47 ) 
+	"+ range ( 97 , 122)
    exe "set <M-" .nr2char(UseAlt).">=\<Esc>" .nr2char (UseAlt)
 endfor
 
