@@ -41,7 +41,7 @@ Bundle 'kien/rainbow_parentheses.vim'
 "目录树
 Bundle 'vim-scripts/The-NERD-tree'
 "代码完成
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 "Vim plugin: Testing framework for Vim script
 Bundle 'kana/vim-vspec'
 "将代码行最后无效的空格标红
@@ -52,7 +52,7 @@ Bundle 'https://git.wincent.com/command-t.git'
 "puppet代码高亮
 Bundle 'https://github.com/rodjek/vim-puppet'
 "python 代码完成
-Bundle 'https://github.com/davidhalter/jedi-vim'
+"Bundle 'https://github.com/davidhalter/jedi-vim'
 
 filetype plugin indent on     " 必须有
  "
@@ -65,43 +65,44 @@ filetype plugin indent on     " 必须有
  " see :h vundle for more details or wiki for FAQ
  " NOTE: comments after Bundle command are not allowed..
 
-" Jedi options
-" Jedi options
-"Jedi is by default automatically initialized. If you don't want that I suggest you disable the auto-initialization in your .vimrc:
-let g:jedi#auto_initialization = 1
 
-"There are also some VIM options (like completeopt) which are automatically initialized, if you don't want that:
-let g:jedi#auto_vim_configuration = 0
-
-"The goto is by default on <leader g>. If you want to change that:
-let g:jedi#goto_assignments_command = '<C-g>'
-
-"get_definition is by default on <leader d>. If you want to change that:
-let g:jedi#goto_definitions_command = '<C-d>'
-
-"Showing the pydoc is by default on K If you want to change that:
-let g:jedi#documentation_command = 'K' 
-
-let g:jedi#use_tabs_not_buffers = 0 
-"If you are a person who likes to use VIM-buffers not tabs, you might want to put that in your .vimrc:
-
-"Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
-let g:jedi#popup_on_dot = 0 
-
-"Jedi selects the first line of the completion menu: for a better typing-flow and usually saves one keypress.
-let g:jedi#popup_select_first = 0 
-
-"There's some support for refactoring:
-"let g:jedi#rename_command = '<C-r>'
-
-"And you can list all names that are related (have the same origin):
-let g:jedi#usages_command = '<C-n>'
-
-"If you want to change the default autocompletion command:
-let g:jedi#completions_command = '<M-/>'
-
-"By default you get a window that displays the function definition you're currently in. If you don't want that:
-let g:jedi#show_call_signatures = '0'
+"" Jedi options
+"" Jedi options
+""Jedi is by default automatically initialized. If you don't want that I suggest you disable the auto-initialization in your .vimrc:
+"let g:jedi#auto_initialization = 1
+"
+""There are also some VIM options (like completeopt) which are automatically initialized, if you don't want that:
+"let g:jedi#auto_vim_configuration = 0
+"
+""The goto is by default on <leader g>. If you want to change that:
+"let g:jedi#goto_assignments_command = '<C-g>'
+"
+""get_definition is by default on <leader d>. If you want to change that:
+"let g:jedi#goto_definitions_command = '<C-d>'
+"
+""Showing the pydoc is by default on K If you want to change that:
+"let g:jedi#documentation_command = 'K' 
+"
+"let g:jedi#use_tabs_not_buffers = 0 
+""If you are a person who likes to use VIM-buffers not tabs, you might want to put that in your .vimrc:
+"
+""Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
+"let g:jedi#popup_on_dot = 0 
+"
+""Jedi selects the first line of the completion menu: for a better typing-flow and usually saves one keypress.
+"let g:jedi#popup_select_first = 0 
+"
+""There's some support for refactoring:
+""let g:jedi#rename_command = '<C-r>'
+"
+""And you can list all names that are related (have the same origin):
+"let g:jedi#usages_command = '<C-n>'
+"
+""If you want to change the default autocompletion command:
+"let g:jedi#completions_command = '<M-/>'
+"
+""By default you get a window that displays the function definition you're currently in. If you don't want that:
+"let g:jedi#show_call_signatures = '0'
 
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -536,8 +537,7 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 
 set ttimeoutlen=1
 " 防止terminal截取alt键,导致M-x的快捷键不能用
-for UseAlt in range ( 44 , 47 )
-   "	+ range ( 97 , 122)
+for UseAlt in range ( 44 , 47 ) + range ( 97 , 122)
    exe "set <M-" .nr2char(UseAlt).">=\<Esc>" .nr2char (UseAlt)
 endfor
 
@@ -551,3 +551,7 @@ set pastetoggle=<F8>
 set nrformats=
 
 au BufRead *.py map <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
+
+let g:ycm_key_invoke_completion = '<M-/>'
+let g:ycm_min_num_of_chars_for_completion = 99
+nmap K :YcmCompleter GoToDefinition<CR>
