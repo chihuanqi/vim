@@ -44,6 +44,8 @@ Bundle 'vim-scripts/The-NERD-tree'
 "Bundle 'Valloric/YouCompleteMe'
 "Vim plugin: Testing framework for Vim script
 Bundle 'kana/vim-vspec'
+"将代码行最后无效的空格标红
+Bundle 'bronson/vim-trailing-whitespace'
 
 "打开文件
 Bundle 'https://git.wincent.com/command-t.git' 
@@ -80,8 +82,8 @@ let g:jedi#goto_definitions_command = '<C-d>'
 "Showing the pydoc is by default on K If you want to change that:
 let g:jedi#documentation_command = 'K' 
 
-"If you are a person who likes to use VIM-buffers not tabs, you might want to put that in your .vimrc:
 let g:jedi#use_tabs_not_buffers = 0 
+"If you are a person who likes to use VIM-buffers not tabs, you might want to put that in your .vimrc:
 
 "Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
 let g:jedi#popup_on_dot = 0 
@@ -90,7 +92,7 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0 
 
 "There's some support for refactoring:
-let g:jedi#rename_command = '<C-r>'
+"let g:jedi#rename_command = '<C-r>'
 
 "And you can list all names that are related (have the same origin):
 let g:jedi#usages_command = '<C-n>'
@@ -517,10 +519,14 @@ nmap <M-n> <C-t>
 "nmap <M-m> <C-o>
 nmap <M-/> :ts  <CR>
 
-nmap <M-w> <Esc>:w<CR>
-imap <M-w> <Esc>:w<CR>
-nmap <M-q> <Esc>:q<CR>
-imap <M-q> <Esc>:q<CR>
+"For Gnome-terminal, use the following instead:
+"imap ^[i <Esc>
+"^[i should be typed by pressing Ctrl-v Alt-i
+nmap w :w<CR>
+"imap w <C-O>:w<CR>
+imap w <Esc>:w<CR>
+nmap q :q<CR>
+imap q <Esc>:q<CR>
 "let g:tagbar_left=1
 
 map bf :BufExplorer<CR>
@@ -530,7 +536,8 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 
 set ttimeoutlen=1
 " 防止terminal截取alt键,导致M-x的快捷键不能用
-for UseAlt in range ( 44 , 47 ) + range ( 97 , 122)
+for UseAlt in range ( 44 , 47 )
+   "	+ range ( 97 , 122)
    exe "set <M-" .nr2char(UseAlt).">=\<Esc>" .nr2char (UseAlt)
 endfor
 
