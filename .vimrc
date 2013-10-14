@@ -25,6 +25,8 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 "buffer管理
 Bundle 'vim-scripts/bufexplorer.zip'
+"run command in vim
+"Bundle 'basepi/vim-conque'
 
 "状态栏
 "Bundle 'Lokaltog/vim-powerline'
@@ -178,7 +180,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-colorscheme desert
+"colorscheme desert
 set background=dark
 
 " Set extra options when running in GUI mode
@@ -550,8 +552,8 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 "Alt 组合键不映射到菜单上
 set winaltkeys=no
 "组合键延迟
-set timeoutlen=10
-set ttimeoutlen=10
+set timeoutlen=400
+set ttimeoutlen=400
 
 set pastetoggle=<F8>
 
@@ -562,9 +564,15 @@ set pastetoggle=<F8>
 "试用十进制
 set nrformats=
 
-au BufRead *.py map <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
+au BufRead *.py map <buffer> <F5> :w<CR>:!bash main.sh <CR>
 
 let g:ycm_key_invoke_completion = '<M-/>'
 let g:ycm_min_num_of_chars_for_completion = 99
 nmap K :YcmCompleter GoToDefinition<CR>
 
+"鼠标右键弹出菜单
+set mousemodel=popup
+
+function Maximize_Window()
+  silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+endfunction
