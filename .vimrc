@@ -1,6 +1,11 @@
 set nocompatible               " 设置 vim 为不兼容 vi 模式
 filetype off                   " 必须的
 
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -42,12 +47,23 @@ Bundle 'tpope/vim-rails.git'
 Bundle 'kien/rainbow_parentheses.vim'
 "目录树
 Bundle 'vim-scripts/The-NERD-tree'
+map <leader>n :NERDTreeToggle<CR>
+let NERDTreeHighlightCursorline=1
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' , 'tags']
 "代码完成
 Bundle 'Valloric/YouCompleteMe'
 "Vim plugin: Testing framework for Vim script
 Bundle 'kana/vim-vspec'
 "将代码行最后无效的空格标红
 Bundle 'bronson/vim-trailing-whitespace'
+"python 语法检查
+Bundle 'kevinw/pyflakes-vim'
+filetype on            " enables filetype detection
+filetype plugin on     " enables filetype specific plugins
+"自动补全单引号，双引号等
+Bundle 'Raimondi/delimitMate'
+" for python docstring ",优化输入
+au FileType python let b:delimitMate_nesting_quotes = ['"']
 
 "打开文件
 Bundle 'https://git.wincent.com/command-t.git' 
@@ -114,10 +130,6 @@ set history=700
 " Set to auto read when a file is changed from the outside
 set autoread
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -361,7 +373,7 @@ vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
 "
 map <leader>cc :botright cope<cr>
 map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
+"map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
 
@@ -530,6 +542,11 @@ nmap <M-w> :w<CR>
 imap <M-w> <Esc>:w<CR>
 nmap <M-q> :q<CR>
 imap <M-q> <Esc>:q<CR>
+"插入模式移动光标
+imap <M-h> <Left>
+imap <M-j> <Down>
+imap <M-k> <Up>
+imap <M-l> <Right>
 if has("gui_running")
 else
 "	nmap w :w<CR>
@@ -573,6 +590,13 @@ nmap K :YcmCompleter GoToDefinition<CR>
 "鼠标右键弹出菜单
 set mousemodel=popup
 
+"gvim最大化
 function Maximize_Window()
   silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 endfunction
+
+"Smart way to move between windows 分屏窗口移动
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-l> <C-W>l
+map <C-h> <C-W>h
