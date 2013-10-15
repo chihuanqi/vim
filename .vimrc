@@ -503,10 +503,6 @@ colorscheme torte
 
 syntax on "语法高亮
 set number "显示行数
-<<<<<<< HEAD
-=======
-set guifont=WenQuanYi\ Micro\ Hei\ Mono\ 15
->>>>>>> 364f4518f6ef994e7347c388744dad770aa632fd
 "set guifont=Monaco\ 11
 
 "在状态栏显示正在输入的命令
@@ -545,17 +541,14 @@ nmap <M-w> :w<CR>
 imap <M-w> <Esc>:w<CR>
 nmap <M-q> :q<CR>
 imap <M-q> <Esc>:q<CR>
-<<<<<<< HEAD
-if has("gui_running")
-
-=======
 "插入模式移动光标
 imap <M-h> <Left>
 imap <M-j> <Down>
 imap <M-k> <Up>
 imap <M-l> <Right>
+
+imap <C-v> <C-o>"+p<CR>
 if has("gui_running")
->>>>>>> 364f4518f6ef994e7347c388744dad770aa632fd
 else
 "	nmap w :w<CR>
 "	imap w <Esc>:w<CR>
@@ -563,12 +556,7 @@ else
 "	imap q <Esc>:q<CR>
 
 	" 防止terminal截取alt键,导致M-x的快捷键不能用
-<<<<<<< HEAD
-	for UseAlt in range ( 44 , 47 )	+ range( 109, 122)
-		"+ range ( 97 , 122)
-=======
 	for UseAlt in range ( 44 , 47 )	+ range ( 97 , 122)
->>>>>>> 364f4518f6ef994e7347c388744dad770aa632fd
 		exe "set <M-" .nr2char(UseAlt).">=\<Esc>" .nr2char (UseAlt)
 	endfor
 endif
@@ -582,13 +570,8 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 "Alt 组合键不映射到菜单上
 set winaltkeys=no
 "组合键延迟
-<<<<<<< HEAD
-set timeoutlen=500
-set ttimeoutlen=500
-=======
 set timeoutlen=400
 set ttimeoutlen=400
->>>>>>> 364f4518f6ef994e7347c388744dad770aa632fd
 
 set pastetoggle=<F8>
 
@@ -599,10 +582,6 @@ set pastetoggle=<F8>
 "试用十进制
 set nrformats=
 
-<<<<<<< HEAD
-"au BufRead *.py map <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
-=======
->>>>>>> 364f4518f6ef994e7347c388744dad770aa632fd
 au BufRead *.py map <buffer> <F5> :w<CR>:!bash main.sh <CR>
 
 let g:ycm_key_invoke_completion = '<M-/>'
@@ -612,20 +591,15 @@ nmap K :YcmCompleter GoToDefinition<CR>
 "鼠标右键弹出菜单
 set mousemodel=popup
 
-<<<<<<< HEAD
-=======
 "gvim最大化
->>>>>>> 364f4518f6ef994e7347c388744dad770aa632fd
 function Maximize_Window()
   silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 endfunction
 
-<<<<<<< HEAD
-so ~/.local.vim
-=======
 "Smart way to move between windows 分屏窗口移动
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-l> <C-W>l
 map <C-h> <C-W>h
->>>>>>> 364f4518f6ef994e7347c388744dad770aa632fd
+
+so ~/.local.vim
