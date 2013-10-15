@@ -25,6 +25,8 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 "buffer管理
 Bundle 'vim-scripts/bufexplorer.zip'
+"run command in vim
+"Bundle 'basepi/vim-conque'
 
 "状态栏
 "Bundle 'Lokaltog/vim-powerline'
@@ -178,7 +180,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-colorscheme desert
+"colorscheme desert
 set background=dark
 
 " Set extra options when running in GUI mode
@@ -489,7 +491,6 @@ colorscheme torte
 
 syntax on "语法高亮
 set number "显示行数
-set guifont=WenQuanYi\ Micro\ Hei\ Mono\ 13
 "set guifont=Monaco\ 11
 
 "在状态栏显示正在输入的命令
@@ -523,11 +524,25 @@ nmap <M-/> :ts  <CR>
 "For Gnome-terminal, use the following instead:
 "imap ^[i <Esc>
 "^[i should be typed by pressing Ctrl-v Alt-i
-nmap w :w<CR>
-"imap w <C-O>:w<CR>
-imap w <Esc>:w<CR>
-nmap q :q<CR>
-imap q <Esc>:q<CR>
+nmap <M-w> :w<CR>
+"imap <M-w> <C-O>:w<CR>
+imap <M-w> <Esc>:w<CR>
+nmap <M-q> :q<CR>
+imap <M-q> <Esc>:q<CR>
+if has("gui_running")
+
+else
+"	nmap w :w<CR>
+"	imap w <Esc>:w<CR>
+"	nmap q :q<CR>
+"	imap q <Esc>:q<CR>
+
+	" 防止terminal截取alt键,导致M-x的快捷键不能用
+	for UseAlt in range ( 44 , 47 )	+ range( 109, 122)
+		"+ range ( 97 , 122)
+		exe "set <M-" .nr2char(UseAlt).">=\<Esc>" .nr2char (UseAlt)
+	endfor
+endif
 "let g:tagbar_left=1
 
 map bf :BufExplorer<CR>
@@ -535,12 +550,11 @@ map bf :BufExplorer<CR>
 set fileencoding=utf-8
 set fileencodings=utf-8,gb18030,utf-16,big5
 
-set ttimeoutlen=1
-" 防止terminal截取alt键,导致M-x的快捷键不能用
-for UseAlt in range ( 44 , 47 )
-   "	+ range ( 97 , 122)
-   exe "set <M-" .nr2char(UseAlt).">=\<Esc>" .nr2char (UseAlt)
-endfor
+"Alt 组合键不映射到菜单上
+set winaltkeys=no
+"组合键延迟
+set timeoutlen=500
+set ttimeoutlen=500
 
 set pastetoggle=<F8>
 
@@ -551,8 +565,18 @@ set pastetoggle=<F8>
 "试用十进制
 set nrformats=
 
-au BufRead *.py map <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
+"au BufRead *.py map <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
+au BufRead *.py map <buffer> <F5> :w<CR>:!bash main.sh <CR>
 
 let g:ycm_key_invoke_completion = '<M-/>'
 let g:ycm_min_num_of_chars_for_completion = 99
 nmap K :YcmCompleter GoToDefinition<CR>
+
+"鼠标右键弹出菜单
+set mousemodel=popup
+
+function Maximize_Window()
+  silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+endfunction
+
+so ~/.local.vim
