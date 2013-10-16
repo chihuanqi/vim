@@ -503,7 +503,6 @@ colorscheme torte
 
 syntax on "语法高亮
 set number "显示行数
-set guifont=WenQuanYi\ Micro\ Hei\ Mono\ 15
 "set guifont=Monaco\ 11
 
 "在状态栏显示正在输入的命令
@@ -602,3 +601,5 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-l> <C-W>l
 map <C-h> <C-W>h
+
+so ~/.local.vim
