@@ -214,9 +214,9 @@ set ffs=unix,dos,mac
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
+"set nobackup
+"set nowb
+"set noswapfile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -547,7 +547,7 @@ imap <M-j> <Down>
 imap <M-k> <Up>
 imap <M-l> <Right>
 
-imap <C-v> <C-o>"+p
+imap <C-v> <Left><C-o>"+p
 if has("gui_running")
 else
 "	nmap w :w<CR>
