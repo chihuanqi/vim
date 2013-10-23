@@ -547,7 +547,7 @@ imap <M-j> <Down>
 imap <M-k> <Up>
 imap <M-l> <Right>
 
-imap <C-v> <Left><C-o>"+p
+imap <C-v> <C-o>"+P
 if has("gui_running")
 else
 "	nmap w :w<CR>
