@@ -632,3 +632,17 @@ inoremap <C-Z> <C-O>u
 noremap <C-Y> <C-R>
 inoremap <C-Y> <C-O><C-R>
 
+" Tab Control (others)
+map <A-1> 1gt
+map <A-2> 2gt
+map <A-3> 3gt
+map <A-4> 4gt
+map <A-5> 5gt
+map <A-6> 6gt
+map <A-7> 7gt
+map <A-8> 8gt
+map <A-9> 9gt
+map <C-Tab> <ESC>:tabnext<CR>
+map <C-S-Tab> <ESC>:tabprevious<CR>
+map <C-t> <ESC>:tabnew<CR>
+map <C-w> <ESC>:tabc<CR>
