@@ -550,7 +550,7 @@ imap <M-j> <Down>
 imap <M-k> <Up>
 imap <M-l> <Right>
 
-imap <C-v> <C-o>"+P
+"imap <C-v> <C-o>"+P
 if has("gui_running")
 else
 "	nmap w :w<CR>
@@ -607,3 +607,28 @@ map <C-l> <C-W>l
 map <C-h> <C-W>h
 
 so ~/.local.vim
+
+vnoremap <C-C> "+y
+vnoremap <C-X> "+x
+
+" Pasting blockwise and linewise selections is not possible in Insert and
+" Visual mode without the +virtualedit feature.  They are pasted as if they
+" were characterwise instead.
+" Uses the paste.vim autoload script.
+" Use CTRL-G u to have CTRL-Z only undo the paste.
+exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
+imap <S-Insert>		<C-V>
+map <S-Insert>		"+gP
+
+noremap <C-S>		:update<CR>
+vnoremap <C-S>		<C-C>:update<CR>
+inoremap <C-S>		<C-O>:update<CR>
+
+" CTRL-Z is Undo; not in cmdline though
+noremap <C-Z> u
+inoremap <C-Z> <C-O>u
+
+" CTRL-Y is Redo (although not repeat); not in cmdline though
+noremap <C-Y> <C-R>
+inoremap <C-Y> <C-O><C-R>
+
