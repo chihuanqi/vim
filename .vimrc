@@ -497,7 +497,8 @@ set nocsverb
 "set autochdir
 "set showmatch
 autocmd FileType c,h,cpp,S set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab | set nolist | set tags+=~/.vim/systags|cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out
-autocmd FileType python set expandtab | set list | set listchars=tab:>- | let g:jedi#goto_definitions_command = '<M-.>' | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
+"autocmd FileType python set expandtab | set list | set listchars=tab:>- | let g:jedi#goto_definitions_command = '<M-.>' | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
+autocmd FileType python set expandtab | set list | set listchars=tab:>- | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
 
 "open/close Tlist
 "let Tlist_Auto_Open=1
@@ -602,10 +603,10 @@ function Maximize_Window()
 endfunction
 
 "Smart way to move between windows 分屏窗口移动
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-l> <C-W>l
-map <C-h> <C-W>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-h> <C-w>h
 
 so ~/.local.vim
 
