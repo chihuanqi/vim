@@ -70,7 +70,7 @@ Bundle 'https://git.wincent.com/command-t.git'
 "puppet代码高亮
 Bundle 'https://github.com/rodjek/vim-puppet'
 "python 代码完成
-"Bundle 'https://github.com/davidhalter/jedi-vim'
+Bundle 'https://github.com/davidhalter/jedi-vim'
 "代码检查
 Bundle "scrooloose/syntastic"
 
@@ -89,10 +89,10 @@ filetype plugin indent on     " 必须有
 "" Jedi options
 "" Jedi options
 ""Jedi is by default automatically initialized. If you don't want that I suggest you disable the auto-initialization in your .vimrc:
-"let g:jedi#auto_initialization = 1
+let g:jedi#auto_initialization = 1
 "
 ""There are also some VIM options (like completeopt) which are automatically initialized, if you don't want that:
-"let g:jedi#auto_vim_configuration = 0
+let g:jedi#auto_vim_configuration = 0
 "
 ""The goto is by default on <leader g>. If you want to change that:
 "let g:jedi#goto_assignments_command = '<M-.>'
@@ -102,7 +102,7 @@ filetype plugin indent on     " 必须有
 "let g:jedi#goto_definitions_command = '<leader d>'
 "
 ""Showing the pydoc is by default on K If you want to change that:
-"let g:jedi#documentation_command = 'K'
+let g:jedi#documentation_command = 'H'
 "
 "let g:jedi#use_tabs_not_buffers = 0
 ""If you are a person who likes to use VIM-buffers not tabs, you might want to put that in your .vimrc:
@@ -646,5 +646,5 @@ map <A-8> 8gt
 map <A-9> 9gt
 map <C-Tab> <ESC>:tabnext<CR>
 map <C-S-Tab> <ESC>:tabprevious<CR>
-map <C-t> <ESC>:tabnew<CR>
+"map <C-t> <ESC>:tabnew<CR>
 "map <C-w> <ESC>:tabc<CR>
