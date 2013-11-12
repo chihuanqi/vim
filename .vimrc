@@ -575,8 +575,8 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 "Alt 组合键不映射到菜单上
 set winaltkeys=no
 "组合键延迟
-set timeoutlen=400
-set ttimeoutlen=400
+set timeoutlen=200
+set ttimeoutlen=200
 
 set pastetoggle=<F8>
 
