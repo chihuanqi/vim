@@ -51,7 +51,7 @@ map <leader>n :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' , 'tags']
 "代码完成
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 "Vim plugin: Testing framework for Vim script
 Bundle 'kana/vim-vspec'
 "将代码行最后无效的空格标红
@@ -66,7 +66,7 @@ Bundle 'Raimondi/delimitMate'
 au FileType python let b:delimitMate_nesting_quotes = ['"']
 
 "打开文件
-Bundle 'https://git.wincent.com/command-t.git'
+Bundle 'wincent/Command-T'
 "puppet代码高亮
 Bundle 'https://github.com/rodjek/vim-puppet'
 "python 代码完成
@@ -90,40 +90,40 @@ filetype plugin indent on     " 必须有
 "" Jedi options
 ""Jedi is by default automatically initialized. If you don't want that I suggest you disable the auto-initialization in your .vimrc:
 let g:jedi#auto_initialization = 1
-"
-""There are also some VIM options (like completeopt) which are automatically initialized, if you don't want that:
+""
+"""There are also some VIM options (like completeopt) which are automatically initialized, if you don't want that:
 let g:jedi#auto_vim_configuration = 0
-"
-""The goto is by default on <leader g>. If you want to change that:
-"let g:jedi#goto_assignments_command = '<M-.>'
-"nmap <M-,> <C-o>
-"
-""get_definition is by default on <leader d>. If you want to change that:
-"let g:jedi#goto_definitions_command = '<leader d>'
-"
-""Showing the pydoc is by default on K If you want to change that:
+""
+"""The goto is by default on <leader g>. If you want to change that:
+let g:jedi#goto_assignments_command = 'M'
+""nmap <M-,> <C-o>
+""
+"""get_definition is by default on <leader d>. If you want to change that:
+let g:jedi#goto_definitions_command = 'K'
+""
+"""Showing the pydoc is by default on K If you want to change that:
 let g:jedi#documentation_command = 'H'
-"
-"let g:jedi#use_tabs_not_buffers = 0
-""If you are a person who likes to use VIM-buffers not tabs, you might want to put that in your .vimrc:
-"
-""Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
-"let g:jedi#popup_on_dot = 0
-"
-""Jedi selects the first line of the completion menu: for a better typing-flow and usually saves one keypress.
-"let g:jedi#popup_select_first = 0
-"
-""There's some support for refactoring:
+""
+let g:jedi#use_tabs_not_buffers = 0
+"""If you are a person who likes to use VIM-buffers not tabs, you might want to put that in your .vimrc:
+""
+"""Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
+let g:jedi#popup_on_dot = 0
+""
+"""Jedi selects the first line of the completion menu: for a better typing-flow and usually saves one keypress.
+let g:jedi#popup_select_first = 1
+""
+"""There's some support for refactoring:
 ""let g:jedi#rename_command = '<C-r>'
-"
-""And you can list all names that are related (have the same origin):
+""
+"""And you can list all names that are related (have the same origin):
 "let g:jedi#usages_command = '<C-n>'
-"
-""If you want to change the default autocompletion command:
-"let g:jedi#completions_command = '<M-/>'
-"
-""By default you get a window that displays the function definition you're currently in. If you don't want that:
-"let g:jedi#show_call_signatures = '0'
+""
+"""If you want to change the default autocompletion command:
+let g:jedi#completions_command = '<M-/>'
+""
+"""By default you get a window that displays the function definition you're currently in. If you don't want that:
+let g:jedi#show_call_signatures = '0'
 
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -590,9 +590,9 @@ set nrformats=
 au BufRead *.py map <buffer> <F5> :w<CR>:!bash main.sh <CR>
 
 "YCM
-let g:ycm_key_invoke_completion = '<M-/>'
-let g:ycm_min_num_of_chars_for_completion = 99
-nmap K :YcmCompleter GoToDefinition<CR>
+"let g:ycm_key_invoke_completion = '<M-/>'
+"let g:ycm_min_num_of_chars_for_completion = 99
+"nmap K :YcmCompleter GoToDefinition<CR>
 
 "鼠标右键弹出菜单
 set mousemodel=popup
@@ -648,3 +648,15 @@ map <C-Tab> <ESC>:tabnext<CR>
 map <C-S-Tab> <ESC>:tabprevious<CR>
 "map <C-t> <ESC>:tabnew<CR>
 "map <C-w> <ESC>:tabc<CR>
+
+function! CleverTab()
+   if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+      return "\<Tab>"
+   else
+      return "\<C-N>"
+   endif
+endfunction
+inoremap <Tab> <C-R>=CleverTab()<CR>
+
+"set helplang=cn
+set helplang=en
