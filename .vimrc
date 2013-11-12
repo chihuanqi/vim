@@ -111,7 +111,7 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_on_dot = 0
 ""
 """Jedi selects the first line of the completion menu: for a better typing-flow and usually saves one keypress.
-let g:jedi#popup_select_first = 1
+let g:jedi#popup_select_first = 0
 ""
 """There's some support for refactoring:
 ""let g:jedi#rename_command = '<C-r>'
@@ -657,6 +657,13 @@ function! CleverTab()
    endif
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
+inoremap <expr> <space> pumvisible()?"\<C-Y>":"\<space>"
 
 "set helplang=cn
 set helplang=en
+
+"自动完成弹出菜单的颜色设置
+hi Pmenu guifg=#c0c0c0 guibg=#404080
+hi PmenuSel guifg=#c0c0c0 guibg=#2050d0
+hi PmenuSbar guifg=blue guibg=darkgray
+hi PmenuThumb guifg=#c0c0c0
