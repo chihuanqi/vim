@@ -30,6 +30,9 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 "buffer管理
 Bundle 'vim-scripts/bufexplorer.zip'
+"corlor scheme
+Bundle 'desert256.vim'
+Bundle 'desertEx'
 "run command in vim
 "Bundle 'basepi/vim-conque'
 
@@ -73,6 +76,8 @@ Bundle 'https://github.com/rodjek/vim-puppet'
 Bundle 'https://github.com/davidhalter/jedi-vim'
 "代码检查
 Bundle "scrooloose/syntastic"
+"配色
+Bundle "altercation/vim-colors-solarized"
 
 filetype plugin indent on     " 必须有
  "
@@ -196,7 +201,9 @@ set tm=500
 syntax enable
 
 "colorscheme desert
+let g:solarized_termcolors=256
 set background=dark
+colorscheme solarized
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -502,8 +509,6 @@ autocmd FileType python set expandtab | set list | set listchars=tab:>- | set ta
 
 "open/close Tlist
 "let Tlist_Auto_Open=1
-colorscheme torte
-"koehler
 
 syntax on "语法高亮
 set number "显示行数
@@ -513,7 +518,6 @@ set number "显示行数
 set showcmd
 
 set modeline
-set background=dark
 
 autocmd FileType python setlocal foldmethod=indent
 "默认展开所有代码
@@ -663,7 +667,7 @@ inoremap <expr> <space> pumvisible()?"\<C-Y>":"\<space>"
 set helplang=en
 
 "自动完成弹出菜单的颜色设置
-hi Pmenu guifg=#c0c0c0 guibg=#404080
-hi PmenuSel guifg=#c0c0c0 guibg=#2050d0
-hi PmenuSbar guifg=blue guibg=darkgray
-hi PmenuThumb guifg=#c0c0c0
+"hi Pmenu guifg=#c0c0c0 guibg=#404080
+"hi PmenuSel guifg=#c0c0c0 guibg=#2050d0
+"hi PmenuSbar guifg=blue guibg=darkgray
+"hi PmenuThumb guifg=#c0c0c0
