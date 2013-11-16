@@ -15,4 +15,6 @@ Install:
     vim
     BundleInstall
 
+	add system var PYTHON_SITE_PACKAGE_PATH point to python site package path like "/home/user/.pythonbrew/pythons/Python-2.7.3/lib/python2.7/site-packages" in .bashrc or .zshrc, this can improve jedi-vim
+
     enjoyundle

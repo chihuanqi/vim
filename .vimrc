@@ -73,7 +73,7 @@ Bundle 'wincent/Command-T'
 "puppet代码高亮
 Bundle 'https://github.com/rodjek/vim-puppet'
 "python 代码完成
-Bundle 'https://github.com/davidhalter/jedi-vim'
+Bundle 'https://github.com/chihuanqi/jedi-vim'
 "代码检查
 Bundle "scrooloose/syntastic"
 "配色
@@ -122,7 +122,7 @@ let g:jedi#popup_select_first = 0
 ""let g:jedi#rename_command = '<C-r>'
 ""
 """And you can list all names that are related (have the same origin):
-"let g:jedi#usages_command = '<C-n>'
+let g:jedi#usages_command = '~n'
 ""
 """If you want to change the default autocompletion command:
 let g:jedi#completions_command = '<M-/>'
@@ -579,8 +579,8 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 "Alt 组合键不映射到菜单上
 set winaltkeys=no
 "组合键延迟
-set timeoutlen=200
-set ttimeoutlen=200
+set timeoutlen=400
+set ttimeoutlen=400
 
 set pastetoggle=<F8>
 
