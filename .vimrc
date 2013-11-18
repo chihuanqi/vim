@@ -122,7 +122,7 @@ let g:jedi#popup_select_first = 0
 ""let g:jedi#rename_command = '<C-r>'
 ""
 """And you can list all names that are related (have the same origin):
-"let g:jedi#usages_command = '<C-n>'
+let g:jedi#usages_command = '<C-n>'
 ""
 """If you want to change the default autocompletion command:
 let g:jedi#completions_command = '<M-/>'
@@ -199,19 +199,6 @@ set tm=500
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
-
-"colorscheme desert
-let g:solarized_termcolors=256
-set background=dark
-colorscheme solarized
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions+=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -557,7 +544,16 @@ imap <M-k> <Up>
 imap <M-l> <Right>
 
 "imap <C-v> <C-o>"+P
+" Set extra options when running in GUI mode
 if has("gui_running")
+    set guioptions-=T
+    set guioptions+=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+	"colorscheme desert
+	let g:solarized_termcolors=256
+	set background=dark
+	colorscheme solarized
 else
 "	nmap w :w<CR>
 "	imap w <Esc>:w<CR>
@@ -568,6 +564,9 @@ else
 	for UseAlt in range ( 44 , 47 )	+ range ( 97 , 122)
 		exe "set <M-" .nr2char(UseAlt).">=\<Esc>" .nr2char (UseAlt)
 	endfor
+	set t_Co=256
+	set background=dark
+	colorscheme desertEx
 endif
 "let g:tagbar_left=1
 
@@ -579,8 +578,8 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 "Alt 组合键不映射到菜单上
 set winaltkeys=no
 "组合键延迟
-set timeoutlen=200
-set ttimeoutlen=200
+set timeoutlen=400
+set ttimeoutlen=400
 
 set pastetoggle=<F8>
 
@@ -661,6 +660,7 @@ function! CleverTab()
    endif
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
+inoremap j <C-N>
 inoremap <expr> <space> pumvisible()?"\<C-Y>":"\<space>"
 
 "set helplang=cn
