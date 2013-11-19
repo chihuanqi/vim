@@ -554,6 +554,9 @@ if has("gui_running")
 	let g:solarized_termcolors=256
 	set background=dark
 	colorscheme solarized
+	"组合键延迟
+	set timeoutlen=500
+	set ttimeoutlen=500
 else
 "	nmap w :w<CR>
 "	imap w <Esc>:w<CR>
@@ -567,6 +570,9 @@ else
 	set t_Co=256
 	set background=dark
 	colorscheme desertEx
+	"组合键延迟
+	set timeoutlen=300
+	set ttimeoutlen=300
 endif
 "let g:tagbar_left=1
 
@@ -577,9 +583,6 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 
 "Alt 组合键不映射到菜单上
 set winaltkeys=no
-"组合键延迟
-set timeoutlen=300
-set ttimeoutlen=300
 
 set pastetoggle=<F8>
 
@@ -649,8 +652,8 @@ map <A-8> 8gt
 map <A-9> 9gt
 map <C-Tab> <ESC>:tabnext<CR>
 map <C-S-Tab> <ESC>:tabprevious<CR>
-"map <C-t> <ESC>:tabnew<CR>
-"map <C-w> <ESC>:tabc<CR>
+map <leader>t <ESC>:tabnew<CR>
+map <leader>w <ESC>:tabc<CR>
 
 function! CleverTab()
    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
@@ -660,7 +663,7 @@ function! CleverTab()
    endif
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
-inoremap j <C-N>
+"inoremap j <C-N>
 inoremap <expr> <space> pumvisible()?"\<C-Y>":"\<space>"
 
 "set helplang=cn
