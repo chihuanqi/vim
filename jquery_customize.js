@@ -72,11 +72,6 @@ API.prototype.transactionCount;
  */
 API.prototype.send = function(params, success){
     var time = new Date();
-    if(test==1){
-        throw(new Error(-1, "wrong!"));
-    } else {
-        test += 1;
-    }
     params.nonce = time.getMilliseconds();
     var query = $.param(params);
     this.headers.sign = CryptoJS.HmacSHA512(query,this.secret).toString();
