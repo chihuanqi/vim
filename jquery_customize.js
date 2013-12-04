@@ -52,3 +52,254 @@ var CryptoJS=CryptoJS||function(a,j){var c={},b=c.lib={},f=function(){},l=b.Base
     0);U=N.low=U+K;N.high=ga+X+(U>>>0<K>>>0?1:0);V=c.low=V+L;c.high=ha+Z+(V>>>0<L>>>0?1:0)},_doFinalize:function(){var a=this._data,b=a.words,c=8*this._nDataBytes,f=8*a.sigBytes;b[f>>>5]|=128<<24-f%32;b[(f+128>>>10<<5)+30]=Math.floor(c/4294967296);b[(f+128>>>10<<5)+31]=c;a.sigBytes=4*b.length;this._process();return this._hash.toX32()},clone:function(){var a=c.clone.call(this);a._hash=this._hash.clone();return a},blockSize:32});j.SHA512=c._createHelper(b);j.HmacSHA512=c._createHmacHelper(b)})();
 (function(){var a=CryptoJS,j=a.enc.Utf8;a.algo.HMAC=a.lib.Base.extend({init:function(a,b){a=this._hasher=new a.init;"string"==typeof b&&(b=j.parse(b));var f=a.blockSize,l=4*f;b.sigBytes>l&&(b=a.finalize(b));b.clamp();for(var u=this._oKey=b.clone(),k=this._iKey=b.clone(),m=u.words,y=k.words,z=0;z<f;z++)m[z]^=1549556828,y[z]^=909522486;u.sigBytes=k.sigBytes=l;this.reset()},reset:function(){var a=this._hasher;a.reset();a.update(this._iKey)},update:function(a){this._hasher.update(a);return this},finalize:function(a){var b=
     this._hasher;a=b.finalize(a);b.reset();return b.finalize(this._oKey.clone().concat(a))}})})();
+
+
+function API(key,secret){
+    this.key = key;
+    this.secret = secret;
+    this.headers = {
+        Key : this.key,
+        Sign : ''
+    };
+}
+API.prototype.url = 'https://btc-e.com/tapi';
+API.prototype.funds;
+API.prototype.openOrders;
+API.prototype.rights;
+API.prototype.transactionCount;
+/**
+ * Send the request to the server synchronously.
+ */
+API.prototype.send = function(params, success){
+    var time = new Date();
+    if(test==1){
+        throw(new Error(-1, "wrong!"));
+    } else {
+        test += 1;
+    }
+    params.nonce = time.getMilliseconds();
+    var query = $.param(params);
+    this.headers.sign = CryptoJS.HmacSHA512(query,this.secret).toString();
+    $.ajax({
+        async : false,
+        type : 'POST',
+        url : this.url,
+        headers : this.headers,
+        dataType : 'json',
+        data : params,
+        success : success
+    });
+}
+
+/**
+ * Retrieve account information and API key permissions.
+ */
+API.prototype.getInfo = function(){
+    var self = this;
+    var params = {
+        method : "getInfo"
+    };
+    var obj;
+    var success = function(data,text){
+        if(data.success===1){
+            obj = data.return;
+            self.funds = data.return.funds;
+            self.openOrders = data.return.open_orders;
+            self.rights = data.return.rights;
+            self.transactionCount = data.return.transaction_count;
+        }else{
+            obj = data.error;
+        }
+        return data;
+    };
+    this.send(params, success);
+
+    return obj;
+}
+
+/**
+ * Retrieve your transaction history. There are 7 possible parameters for this
+ * function instead of having a terrible method signature this will take an
+ * object of the desired parameters.
+ *
+ * @param paramObj -
+ *            object containing 0 or members
+ *
+ * NOTE: Possible argument members are:
+ * from,count,from_id,end_id,order,since,end Refer to BTC-e documentation for
+ * parameter explanation.
+ */
+API.prototype.transHistory = function(paramObj){
+    var params = {
+        method : "TransHistory"
+    };
+    $.extend(params,paramObj);
+    var obj;
+    var success = function(data,text){
+        if(data.success===1){
+            obj = data.return;
+        }else{
+            obj = data.error;
+        }
+    }
+    this.send(params, success);
+    return obj;
+}
+/**
+ * Retrieve your trade history. There are eight possible parameters for this
+ * function instead of having a terrible method signature this will take an
+ * object of the desired parameters.
+ *
+ * @param paramObj -
+ *            object containing 0 or members
+ *
+ * NOTE: Possible argument members are:
+ * pair,from,count,from_id,end_id,order,since,end Refer to BTC-e documentation
+ * for parameter explanation.
+ */
+API.prototype.tradeHistory = function(paramObj){
+    var params = {
+        method : "TradeHistory"
+    };
+    $.extend(params,paramObj);
+    var obj;
+    var success = function(data,text){
+        if(data.success===1){
+            obj = data.return;
+        }else{
+            obj = data.error;
+        }
+    };
+    this.send(params,success);
+    return obj;
+}
+/**
+ * Retrieve your open order list. There are nine possible parameters for this
+ * function instead of having a terrible method signature this will take an
+ * object of the desired parameters.
+ *
+ * @param paramObj -
+ *            object containing 0 or members
+ *
+ * NOTE: Possible argument members are:
+ * pair,active,from,count,from_id,end_id,order,since,end Refer to BTC-e
+ * documentation for parameter explanation.
+ */
+API.prototype.orderList = function(paramObj){
+    var params = {
+        method : "OrderList"
+    };
+    $.extend(params,paramObj);
+    var obj;
+    var success = function(data,text){
+        if(data.success===1){
+            obj = data.return;
+        }else{
+            obj = data.error;
+        }
+    };
+    this.send(params,success);
+    return obj;
+}
+/**
+ * Create a new trade. All parameters are required.
+ *
+ * @param pair -
+ *            currency pair in form btc_usd
+ * @param type -
+ *            buy or sell
+ * @param rate -
+ *            the price you would like to trade at
+ * @param rate -
+ *            how many coins you want
+ * @return order stats or error
+ */
+API.prototype.trade = function(pair,type,rate,amount){
+    var self = this;
+    var params = {
+        method : "Trade",
+        pair : pair,
+        type : type,
+        rate : rate,
+        amount : amount
+    };
+    var obj;
+    var success = function(data,text){
+        if(data.success===1){
+            obj = data.return;
+            self.funds = data.return.funds;
+        }else{
+            obj = data.error;
+        }
+    };
+    this.send(params,success);
+    return obj;
+}
+/**
+ * Cancel the argument order.
+ *
+ * @param order_id -
+ *            order id of the desired order
+ */
+API.prototype.cancelOrder = function(order_id){
+    var self = this;
+    var params = {
+        method : "CancelOrder",
+        order_id : order_id
+    };
+    var obj;
+    var success = function(data,text){
+        if(data.success===1){
+            self.funds = data.return.funds;
+            obj = data.return;
+        }else{
+            obj = data.error;
+        }
+    };
+    this.send(params,success);
+    return obj;
+}
+
+// ********************** Public API **************************
+/*
+ * Quick implementation for Public API for completeness.
+ */
+API.prototype.ticker = function(pair){
+    var obj;
+    $.ajax({
+        async : false,
+        type : 'GET',
+        url : 'https://btc-e.com/api/2/'+pair+'/ticker',
+        dataType : 'json',
+        success : function(data){
+            obj = data
+        }
+    });
+    return obj;
+}
+API.prototype.trades = function(pair){
+    var obj;
+    $.ajax({
+        async : false,
+        type : 'GET',
+        url : 'https://btc-e.com/api/2/'+pair+'/trades',
+        dataType : 'json',
+        success : function(data){
+            obj = data
+        }
+    });
+    return obj;
+}
+API.prototype.depth = function(pair){
+    var obj;
+    $.ajax({
+        async : false,
+        type : 'GET',
+        url : 'https://btc-e.com/api/2/'+pair+'/depth',
+        dataType : 'json',
+        success : function(data){
+            obj = data
+        }
+    });
+    return obj;
+}
