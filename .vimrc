@@ -543,7 +543,6 @@ imap <M-j> <Down>
 imap <M-k> <Up>
 imap <M-l> <Right>
 
-"imap <C-v> <C-o>"+P
 " Set extra options when running in GUI mode
 if has("gui_running")
     set guioptions-=T
@@ -618,6 +617,7 @@ so ~/.local.vim
 
 vnoremap <C-C> "+y
 vnoremap <C-X> "+x
+imap <C-v> <C-o>"+P
 
 " Pasting blockwise and linewise selections is not possible in Insert and
 " Visual mode without the +virtualedit feature.  They are pasted as if they
