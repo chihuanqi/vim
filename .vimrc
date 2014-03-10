@@ -104,7 +104,7 @@ let g:jedi#goto_assignments_command = 'M'
 ""nmap <M-,> <C-o>
 ""
 """get_definition is by default on <leader d>. If you want to change that:
-let g:jedi#goto_definitions_command = 'K'
+"let g:jedi#goto_definitions_command = 'K'
 ""
 """Showing the pydoc is by default on K If you want to change that:
 let g:jedi#documentation_command = 'H'
@@ -492,7 +492,7 @@ set nocsverb
 "set showmatch
 autocmd FileType c,h,cpp,S set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab | set nolist | set tags+=~/.vim/systags|cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out
 "autocmd FileType python set expandtab | set list | set listchars=tab:>- | let g:jedi#goto_definitions_command = '<M-.>' | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
-autocmd FileType python set expandtab | set list | set listchars=tab:>- | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
+autocmd FileType python,py set expandtab | set list | set listchars=tab:>- | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
 
 "open/close Tlist
 "let Tlist_Auto_Open=1
@@ -525,7 +525,7 @@ nmap <M-m> <C-]>
 nmap <M-n> <C-t>
 nmap <M-.> <C-]>
 nmap <M-,> <C-t>
-"nmap <M-/> :ts  <CR>
+nmap <M-/> :ts  <CR>
 nmap <M-o> <C-o>
 nmap <M-i> <C-i>
 
