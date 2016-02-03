@@ -91,6 +91,9 @@ filetype plugin indent on     " 必须有
  " NOTE: comments after Bundle command are not allowed..
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>  Jedi options
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Jedi options
 "" Jedi options
 ""Jedi is by default automatically initialized. If you don't want that I suggest you disable the auto-initialization in your .vimrc:
@@ -464,7 +467,6 @@ endfunction
 
 "let &termencoding=&encoding
 "set fileencodings=utf-8,gbk,ucs-bom,cp936
-"#再提供一个实践中觉得不错的配置：
 " Encoding related
 set encoding=UTF-8
 set langmenu=zh_CN.UTF-8
@@ -479,18 +481,14 @@ filetype plugin indent on
 set completeopt=longest,menu
 let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
-"set tags=/home/chi/temp/redis-2.4.8/src/tags
-"set tags=/home/chi/work/os/linux-0.11-src/linux/tags
 
 "current folder
-"set tags=tags;/
-set tags=./tags,tags
-"set tags+=/home/chi/work/open-source-code/linux.kernel.2.6/tags
+set tags=tags
 set nocsverb
 " 自动设当前编辑的文件所在目录为当前工作路径
 "set autochdir
 "set showmatch
-autocmd FileType c,h,cpp,S set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab | set nolist | set tags+=~/.vim/systags|cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out
+autocmd FileType c,h,cpp,S set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab | set nolist | cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out
 "autocmd FileType python set expandtab | set list | set listchars=tab:>- | let g:jedi#goto_definitions_command = '<M-.>' | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
 autocmd FileType python,py set expandtab | set list | set listchars=tab:>- | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
 
@@ -662,7 +660,7 @@ function! CleverTab()
       return "\<C-N>"
    endif
 endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
+"inoremap <Tab> <C-R>=CleverTab()<CR>
 "inoremap j <C-N>
 inoremap <expr> <space> pumvisible()?"\<C-Y>":"\<space>"
 
@@ -674,3 +672,6 @@ set helplang=en
 "hi PmenuSel guifg=#c0c0c0 guibg=#2050d0
 "hi PmenuSbar guifg=blue guibg=darkgray
 "hi PmenuThumb guifg=#c0c0c0
+
+set cc=80
+
