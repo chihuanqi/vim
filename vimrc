@@ -37,7 +37,7 @@ Bundle 'desertEx'
 "Bundle 'basepi/vim-conque'
 
 "状态栏
-"Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-powerline'
 "git 插件
 Bundle 'tpope/vim-fugitive'
 "高亮选中单词并跳转
@@ -48,6 +48,8 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-rails.git'
 "多重括号颜色区分匹配
 Bundle 'kien/rainbow_parentheses.vim'
+"php 新的语法高亮
+Bundle 'StanAngeloff/php.vim'
 "目录树
 Bundle 'vim-scripts/The-NERD-tree'
 map <leader>n :NERDTreeToggle<CR>
@@ -75,9 +77,11 @@ Bundle 'https://github.com/rodjek/vim-puppet'
 "代码完成
 Bundle 'Valloric/YouCompleteMe'
 "代码检查
-Bundle 'scrooloose/syntastic'
+Bundle "scrooloose/syntastic"
 "配色
 Bundle "altercation/vim-colors-solarized"
+"fcitx输入法切换
+Bundle "vim-scripts/fcitx.vim"
 
 
 filetype plugin indent on     " 必须有
@@ -422,6 +426,12 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => youcompleteme config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_auto_trigger = 0
+let g:ycm_complete_in_strings = 0
+let g:ycm_key_invoke_completion = '<M-/>'
 
 "let &termencoding=&encoding
 "set fileencodings=utf-8,gbk,ucs-bom,cp936
@@ -429,7 +439,7 @@ endfunction
 set encoding=UTF-8
 set langmenu=zh_CN.UTF-8
 language message zh_CN.UTF-8
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set fileencodings=utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1,ucs-bom,
 set fileencoding=utf-8
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
@@ -439,16 +449,22 @@ filetype plugin indent on
 set completeopt=longest,menu
 let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
+"set tags=/home/chi/temp/redis-2.4.8/src/tags
+"set tags=/home/chi/work/os/linux-0.11-src/linux/tags
 
 "current folder
-set tags=tags
+"set tags=tags;/
+set tags=./tags,tags
+"set tags+=/home/chi/work/open-source-code/linux.kernel.2.6/tags
 set nocsverb
 " 自动设当前编辑的文件所在目录为当前工作路径
 "set autochdir
 "set showmatch
-autocmd FileType c,h,cpp,S set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab | set nolist | cs add ~/work/open-source-code/linux.kernel.2.6/cscope.out
+autocmd FileType c,h,cpp,S set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab | set nolist | set tags+=~/.vim/systags|cs add /home/chi/work/open-source-code/linux.kernel.2.6/cscope.out | map <C-/> <C-n>
 "autocmd FileType python set expandtab | set list | set listchars=tab:>- | let g:jedi#goto_definitions_command = '<M-.>' | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
-autocmd FileType python,py set expandtab | set list | set listchars=tab:>- | set tags+=~/.vim/python2.7.3_tags | cs add ~/.pythonbrew/dists/Python-2.7.3/cscope.out
+autocmd FileType python set expandtab | set list | set listchars=tab:>- | set tags+=~/.vim/python2.7.3_tags | cs add /home/chi/.pythonbrew/dists/Python-2.7.3/cscope.out
+autocmd FileType python inoremap <Tab> <C-R>=CleverTab()<CR>
+autocmd FileType html set expandtab | set list | set listchars=tab:>- 
 
 "open/close Tlist
 "let Tlist_Auto_Open=1
@@ -476,7 +492,8 @@ map <S-b> <c-b>
 
 "tagbar
 "nmap <F8> :TagbarToggle<CR>
-nmap <F8> :TagbarOpen fj <CR>
+"nmap <F8> :TagbarOpen fj <CR>
+nmap <F8> :TagbarToggle<CR>
 nmap <M-m> <C-]>
 nmap <M-n> <C-t>
 nmap <M-.> <C-]>
@@ -526,8 +543,8 @@ else
 	set background=dark
 	colorscheme desertEx
 	"组合键延迟
-	set timeoutlen=300
-	set ttimeoutlen=300
+	set timeoutlen=10
+	set ttimeoutlen=0
 endif
 "let g:tagbar_left=1
 
@@ -633,3 +650,13 @@ set helplang=en
 
 set cc=80
 
+"php新语法高亮
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
