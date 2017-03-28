@@ -6,12 +6,12 @@ filetype off                   " 必须的
 let mapleader = ","
 let g:mapleader = ","
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " 让 Vundle 管理 Vundle
 " 此条必须有
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " 例子
  " 代码存放在 vim script 上
@@ -82,6 +82,10 @@ Bundle "scrooloose/syntastic"
 Bundle "altercation/vim-colors-solarized"
 "fcitx输入法切换
 Bundle "vim-scripts/fcitx.vim"
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
 
 
 filetype plugin indent on     " 必须有
